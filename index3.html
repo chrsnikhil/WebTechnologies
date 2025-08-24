@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fantastic Four - Internal CSS</title>
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(45deg, #2c3e50, #34495e, #2c3e50);
+            min-height: 100vh;
+            color: #ecf0f1;
+            line-height: 1.6;
+        }
+
+        /* Header Styles */
+        .header {
+            background: linear-gradient(135deg, #e74c3c, #c0392b, #e74c3c);
+            padding: 30px 20px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(231, 76, 60, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .header h1 {
+            font-size: 3.5em;
+            font-weight: bold;
+            text-shadow: 3px 3px 8px rgba(0,0,0,0.6);
+            color: #fff;
+            letter-spacing: 4px;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header p {
+            font-size: 1.3em;
+            color: #f8f9fa;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.4);
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Navigation Styles */
+        .nav {
+            background: rgba(0,0,0,0.9);
+            padding: 20px;
+            text-align: center;
+            border-bottom: 4px solid #e74c3c;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav a {
+            color: #ecf0f1;
+            text-decoration: none;
+            margin: 0 25px;
+            font-weight: bold;
+            font-size: 1.2em;
+            padding: 10px 20px;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav a:hover {
+            background: #e74c3c;
+            color: #fff;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(231, 76, 60, 0.4);
+        }
+
+        .nav a.active {
+            background: #e74c3c;
+            color: #fff;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            margin-bottom: 50px;
+            padding: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 20px;
+            border: 3px solid #e74c3c;
+            backdrop-filter: blur(10px);
+        }
+
+        .hero h2 {
+            color: #e74c3c;
+            font-size: 2.8em;
+            margin-bottom: 25px;
+            text-shadow: 2px 2px 6px rgba(0,0,0,0.5);
+        }
+
+        .hero p {
+            font-size: 1.4em;
+            color: #bdc3c7;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Image Mapping Section */
+        .image-section {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .image-container {
+            position: relative;
+            display: inline-block;
+            border: 6px solid #e74c3c;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+            transition: transform 0.3s ease;
+        }
+
+        .image-container:hover {
+            transform: scale(1.02);
+        }
+
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Character Cards */
+        .characters-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .character-card {
+            background: linear-gradient(145deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            border: 3px solid transparent;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .character-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #e74c3c, #f39c12, #e74c3c);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .character-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .character-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .character-card.sue { border-color: #3498db; }
+        .character-card.reed { border-color: #e74c3c; }
+        .character-card.ben { border-color: #8b4513; }
+        .character-card.johnny { border-color: #ff4500; }
+
+        .character-icon {
+            font-size: 4em;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .character-card h3 {
+            font-size: 1.8em;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .character-card.sue h3 { color: #3498db; }
+        .character-card.reed h3 { color: #e74c3c; }
+        .character-card.ben h3 { color: #8b4513; }
+        .character-card.johnny h3 { color: #ff4500; }
+
+        .character-card p {
+            color: #bdc3c7;
+            font-size: 1.1em;
+            line-height: 1.6;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 40px;
+            background: rgba(0,0,0,0.9);
+            border-radius: 20px;
+            border-top: 4px solid #e74c3c;
+        }
+
+        .footer p {
+            color: #ecf0f1;
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+
+        .footer .highlight {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.5em;
+            }
+            
+            .nav a {
+                margin: 0 10px;
+                font-size: 1em;
+            }
+            
+            .characters-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    
+    <!-- Header -->
+    <header class="header">
+        <h1>🔥 FANTASTIC FOUR 🔥</h1>
+        <p>Marvel's First Family - Internal CSS Styling</p>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <a href="index2.html">Inline CSS</a>
+        <a href="index3.html" class="active">Internal CSS</a>
+        <a href="index4.html">External CSS</a>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        
+        <!-- Hero Section -->
+        <section class="hero">
+            <h2>Interactive Comic Experience</h2>
+            <p>Explore the Fantastic Four universe by clicking on the characters in the image below. Each click will take you to detailed information about these iconic superheroes!</p>
+        </section>
+
+        <!-- Image Mapping Section -->
+        <section class="image-section">
+            <div class="image-container">
+                <img src="https://m.media-amazon.com/images/I/91pHOBEGheL._UF1000,1000_QL80_.jpg" 
+                     usemap="#image-map" 
+                     alt="Fantastic Four Comic Art">
+                
+                <map name="image-map">
+                    <area target="_blank" alt="SueStorm" title="SueStorm" 
+                          href="https://www.google.com/search?q=sue+storm+invisible+woman" 
+                          coords="200,324,280,392" shape="rect">
+                    <area target="_blank" alt="Reed Richards" title="Reed Richards" 
+                          href="https://www.google.com/search?q=reed+richards+mr+fantastic" 
+                          coords="444,420,44" shape="circle">
+                    <area target="_blank" alt="BenGrimm" title="BenGrimm" 
+                          href="https://www.google.com/search?q=ben+grimm+the+thing" 
+                          coords="351,557,415,631,329,640,320,586" shape="poly">
+                    <area target="_blank" alt="Johny Storm" title="Johny Storm" 
+                          href="https://www.google.com/search?q=johny+storm+human+torch" 
+                          coords="377,261,441,312" shape="rect">
+                    <area target="_blank" alt="Aint it Fantastic FN" title="Ain't it Fantastic FN" 
+                          href="https://www.google.com/search?q=ain%27t+it+fantastic+fn" 
+                          coords="329,122,85" shape="circle">
+                </map>
+            </div>
+        </section>
+
+        <!-- Character Cards -->
+        <section class="characters-grid">
+            
+            <div class="character-card sue">
+                <span class="character-icon">👻</span>
+                <h3>Sue Storm</h3>
+                <p>The Invisible Woman - Master of invisibility and force fields. She can render herself and others invisible while creating powerful force fields for protection.</p>
+            </div>
+
+            <div class="character-card reed">
+                <span class="character-icon">🧬</span>
+                <h3>Reed Richards</h3>
+                <p>Mr. Fantastic - The elastic leader of the team. His body can stretch, bend, and contort into any shape imaginable, making him incredibly versatile.</p>
+            </div>
+
+            <div class="character-card ben">
+                <span class="character-icon">🪨</span>
+                <h3>Ben Grimm</h3>
+                <p>The Thing - Rock-solid strength and heart of gold. Despite his monstrous appearance, Ben is the emotional core of the team with incredible durability.</p>
+            </div>
+
+            <div class="character-card johnny">
+                <span class="character-icon">🔥</span>
+                <h3>Johnny Storm</h3>
+                <p>The Human Torch - Hot-headed and literally on fire. Johnny can engulf his body in flames and fly, making him the team's aerial combat specialist.</p>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>🔥 Fantastic Four Interactive Experience - Created with Internal CSS 🔥</p>
+            <p class="highlight">Click the characters in the image above to explore their stories!</p>
+        </footer>
+    </div>
+
+</body>
+</html>

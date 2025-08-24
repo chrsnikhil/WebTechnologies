@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fantastic Four - Registration Form</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh;
+            color: #ecf0f1;
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 40px;
+            backdrop-filter: blur(10px);
+            border: 2px solid #ff6b35;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 20px;
+            background: linear-gradient(135deg, #ff6b35, #f7931e);
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(255, 107, 53, 0.3);
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.2em;
+            color: #fff;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #ff6b35;
+            font-size: 1.1em;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            background: rgba(255, 255, 255, 0.9);
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #ff6b35;
+            box-shadow: 0 0 10px rgba(255, 107, 53, 0.3);
+            background: #fff;
+        }
+
+        .form-group.error input,
+        .form-group.error select,
+        .form-group.error textarea {
+            border-color: #e74c3c;
+            background: rgba(231, 76, 60, 0.1);
+        }
+
+        .form-group.success input,
+        .form-group.success select,
+        .form-group.success textarea {
+            border-color: #27ae60;
+            background: rgba(39, 174, 96, 0.1);
+        }
+
+        .error-message {
+            color: #e74c3c;
+            font-size: 0.9em;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .success-message {
+            color: #27ae60;
+            font-size: 0.9em;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, #ff6b35, #f7931e);
+            color: #fff;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.2em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(255, 107, 53, 0.4);
+        }
+
+        .submit-btn:disabled {
+            background: #95a5a6;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .validation-summary {
+            background: rgba(231, 76, 60, 0.1);
+            border: 2px solid #e74c3c;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .validation-summary h3 {
+            color: #e74c3c;
+            margin-bottom: 10px;
+        }
+
+        .validation-summary ul {
+            list-style: none;
+            color: #e74c3c;
+        }
+
+        .validation-summary li {
+            margin-bottom: 5px;
+        }
+
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚀 Fantastic Four Registration 🚀</h1>
+            <p>Join the Marvel Universe - Become a Superhero!</p>
+        </div>
+
+        <div class="validation-summary" id="validationSummary">
+            <h3>⚠️ Please fix the following errors:</h3>
+            <ul id="errorList"></ul>
+        </div>
+
+        <form id="fantasticFourForm" novalidate>
+            <!-- JavaScript Validated Elements (8 elements) -->
+            
+            <!-- 1. Hero Name -->
+            <div class="form-group" id="heroNameGroup">
+                <label for="heroName">Hero Name *</label>
+                <input type="text" id="heroName" name="heroName" placeholder="Enter your superhero name">
+                <div class="error-message" id="heroNameError">Hero name must be 3-20 characters and contain only letters, numbers, and spaces</div>
+                <div class="success-message" id="heroNameSuccess">✓ Valid hero name!</div>
+            </div>
+
+            <!-- 2. Email -->
+            <div class="form-group" id="emailGroup">
+                <label for="email">Email Address *</label>
+                <input type="email" id="email" name="email" placeholder="your.email@example.com">
+                <div class="error-message" id="emailError">Please enter a valid email address</div>
+                <div class="success-message" id="emailSuccess">✓ Valid email address!</div>
+            </div>
+
+            <!-- 3. Age -->
+            <div class="form-group" id="ageGroup">
+                <label for="age">Age *</label>
+                <input type="number" id="age" name="age" placeholder="Enter your age">
+                <div class="error-message" id="ageError">Age must be between 18 and 100</div>
+                <div class="success-message" id="ageSuccess">✓ Valid age!</div>
+            </div>
+
+            <!-- 4. Phone Number -->
+            <div class="form-group" id="phoneGroup">
+                <label for="phone">Phone Number *</label>
+                <input type="tel" id="phone" name="phone" placeholder="(123) 456-7890">
+                <div class="error-message" id="phoneError">Please enter a valid phone number (10 digits)</div>
+                <div class="success-message" id="phoneSuccess">✓ Valid phone number!</div>
+            </div>
+
+            <!-- 5. Password -->
+            <div class="form-group" id="passwordGroup">
+                <label for="password">Password *</label>
+                <input type="password" id="password" name="password" placeholder="Enter your password">
+                <div class="error-message" id="passwordError">Password must be at least 8 characters with uppercase, lowercase, number, and special character</div>
+                <div class="success-message" id="passwordSuccess">✓ Strong password!</div>
+            </div>
+
+            <!-- 6. Confirm Password -->
+            <div class="form-group" id="confirmPasswordGroup">
+                <label for="confirmPassword">Confirm Password *</label>
+                <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm your password">
+                <div class="error-message" id="confirmPasswordError">Passwords do not match</div>
+                <div class="success-message" id="confirmPasswordSuccess">✓ Passwords match!</div>
+            </div>
+
+            <!-- 7. Superpower Description -->
+            <div class="form-group" id="superpowerGroup">
+                <label for="superpower">Describe Your Superpower *</label>
+                <textarea id="superpower" name="superpower" rows="4" placeholder="Describe your unique abilities..."></textarea>
+                <div class="error-message" id="superpowerError">Superpower description must be between 20 and 500 characters</div>
+                <div class="success-message" id="superpowerSuccess">✓ Great superpower description!</div>
+            </div>
+
+            <!-- 8. Experience Level -->
+            <div class="form-group" id="experienceGroup">
+                <label for="experience">Years of Hero Experience *</label>
+                <input type="number" id="experience" name="experience" placeholder="Enter years of experience">
+                <div class="error-message" id="experienceError">Experience must be between 0 and 50 years</div>
+                <div class="success-message" id="experienceSuccess">✓ Valid experience level!</div>
+            </div>
+
+            <!-- HTML5 Validated Elements (7 elements) -->
+            
+            <!-- 9. Real Name -->
+            <div class="form-group">
+                <label for="realName">Real Name</label>
+                <input type="text" id="realName" name="realName" placeholder="Your real name" pattern="[A-Za-z\s]{2,50}" title="Please enter your real name (2-50 characters, letters only)">
+            </div>
+
+            <!-- 10. Date of Birth -->
+            <div class="form-group">
+                <label for="birthDate">Date of Birth</label>
+                <input type="date" id="birthDate" name="birthDate" max="2005-12-31" title="You must be at least 18 years old">
+            </div>
+
+            <!-- 11. Website -->
+            <div class="form-group">
+                <label for="website">Hero Website</label>
+                <input type="url" id="website" name="website" placeholder="https://yourherowebsite.com" title="Please enter a valid URL">
+            </div>
+
+            <!-- 12. Team Preference -->
+            <div class="form-group">
+                <label for="teamPreference">Preferred Team</label>
+                <select id="teamPreference" name="teamPreference" required>
+                    <option value="">Select your preferred team</option>
+                    <option value="avengers">Avengers</option>
+                    <option value="xmen">X-Men</option>
+                    <option value="guardians">Guardians of the Galaxy</option>
+                    <option value="defenders">Defenders</option>
+                    <option value="fantastic4">Fantastic Four</option>
+                </select>
+            </div>
+
+            <!-- 13. Availability -->
+            <div class="form-group">
+                <label for="availability">Availability</label>
+                <input type="range" id="availability" name="availability" min="0" max="100" value="50" title="Slide to indicate your availability percentage">
+                <div style="text-align: center; margin-top: 5px;">
+                    <span id="availabilityValue">50%</span> Available
+                </div>
+            </div>
+
+            <!-- 14. Emergency Contact -->
+            <div class="form-group">
+                <label for="emergencyContact">Emergency Contact</label>
+                <input type="tel" id="emergencyContact" name="emergencyContact" placeholder="Emergency contact number" pattern="[0-9]{10,15}" title="Please enter a valid phone number (10-15 digits)">
+            </div>
+
+            <!-- 15. Mission Preferences -->
+            <div class="form-group">
+                <label for="missionPreferences">Mission Preferences</label>
+                <textarea id="missionPreferences" name="missionPreferences" rows="3" placeholder="What types of missions do you prefer?" maxlength="200" title="Maximum 200 characters"></textarea>
+            </div>
+
+            <button type="submit" class="submit-btn" id="submitBtn">🚀 Submit Registration 🚀</button>
+        </form>
+    </div>
+
+    <script>
+        // Form validation JavaScript
+        const form = document.getElementById('fantasticFourForm');
+        const validationSummary = document.getElementById('validationSummary');
+        const errorList = document.getElementById('errorList');
+        const submitBtn = document.getElementById('submitBtn');
+
+        // Validation patterns
+        const patterns = {
+            heroName: /^[A-Za-z0-9\s]{3,20}$/,
+            email: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+            phone: /^\d{10}$/,
+            password: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+            superpower: /^.{20,500}$/
+        };
+
+        // Validation functions
+        function validateHeroName(value) {
+            return patterns.heroName.test(value.trim());
+        }
+
+        function validateEmail(value) {
+            return patterns.email.test(value.trim());
+        }
+
+        function validateAge(value) {
+            const age = parseInt(value);
+            return age >= 18 && age <= 100;
+        }
+
+        function validatePhone(value) {
+            const cleanPhone = value.replace(/\D/g, '');
+            return patterns.phone.test(cleanPhone);
+        }
+
+        function validatePassword(value) {
+            return patterns.password.test(value);
+        }
+
+        function validateConfirmPassword(password, confirmPassword) {
+            return password === confirmPassword && password !== '';
+        }
+
+        function validateSuperpower(value) {
+            return patterns.superpower.test(value.trim());
+        }
+
+        function validateExperience(value) {
+            const experience = parseInt(value);
+            return experience >= 0 && experience <= 50;
+        }
+
+        // Show/hide error and success messages
+        function showError(elementId, message) {
+            const group = document.getElementById(elementId + 'Group');
+            const errorElement = document.getElementById(elementId + 'Error');
+            const successElement = document.getElementById(elementId + 'Success');
+            
+            group.classList.remove('success');
+            group.classList.add('error');
+            errorElement.textContent = message;
+            errorElement.style.display = 'block';
+            successElement.style.display = 'none';
+        }
+
+        function showSuccess(elementId) {
+            const group = document.getElementById(elementId + 'Group');
+            const errorElement = document.getElementById(elementId + 'Error');
+            const successElement = document.getElementById(elementId + 'Success');
+            
+            group.classList.remove('error');
+            group.classList.add('success');
+            errorElement.style.display = 'none';
+            successElement.style.display = 'block';
+        }
+
+        function clearValidation(elementId) {
+            const group = document.getElementById(elementId + 'Group');
+            const errorElement = document.getElementById(elementId + 'Error');
+            const successElement = document.getElementById(elementId + 'Success');
+            
+            group.classList.remove('error', 'success');
+            errorElement.style.display = 'none';
+            successElement.style.display = 'none';
+        }
+
+        // Real-time validation
+        const jsValidatedElements = [
+            'heroName', 'email', 'age', 'phone', 'password', 'confirmPassword', 'superpower', 'experience'
+        ];
+
+        jsValidatedElements.forEach(elementId => {
+            const element = document.getElementById(elementId);
+            element.addEventListener('input', () => validateField(elementId));
+            element.addEventListener('blur', () => validateField(elementId));
+        });
+
+        function validateField(elementId) {
+            const element = document.getElementById(elementId);
+            const value = element.value;
+
+            switch(elementId) {
+                case 'heroName':
+                    if (value.trim() === '') {
+                        clearValidation(elementId);
+                    } else if (validateHeroName(value)) {
+                        showSuccess(elementId);
+                    } else {
+                        showError(elementId, 'Hero name must be 3-20 characters and contain only letters, numbers, and spaces');
+                    }
+                    break;
+
+                case 'email':
+                    if (value.trim() === '') {
+                        clearValidation(elementId);
+                    } else if (validateEmail(value)) {
+                        showSuccess(elementId);
+                    } else {
+                        showError(elementId, 'Please enter a valid email address');
+                    }
+                    break;
+
+                case 'age':
+                    if (value.trim() === '') {
+                        clearValidation(elementId);
+                    } else if (validateAge(value)) {
+                        showSuccess(elementId);
+                    } else {
+                        showError(elementId, 'Age must be between 18 and 100');
+                    }
+                    break;
+
+                case 'phone':
+                    if (value.trim() === '') {
+                        clearValidation(elementId);
+                    } else if (validatePhone(value)) {
+                        showSuccess(elementId);
+                    } else {
+                        showError(elementId, 'Please enter a valid phone number (10 digits)');
+                    }
+                    break;
+
+                case 'password':
+                    if (value.trim() === '') {
+                        clearValidation(elementId);
+                    } else if (validatePassword(value)) {
+                        showSuccess(elementId);
+                    } else {
+                        showError(elementId, 'Password must be at least 8 characters with uppercase, lowercase, number, and special character');
+                    }
+                    break;
+
+                case 'confirmPassword':
+                    const password = document.getElementById('password').value;
+                    if (value.trim() === '') {
+                        clearValidation(elementId);
+                    } else if (validateConfirmPassword(password, value)) {
+                        showSuccess(elementId);
+                    } else {
+                        showError(elementId, 'Passwords do not match');
+                    }
+                    break;
+
+                case 'superpower':
+                    if (value.trim() === '') {
+                        clearValidation(elementId);
+                    } else if (validateSuperpower(value)) {
+                        showSuccess(elementId);
+                    } else {
+                        showError(elementId, 'Superpower description must be between 20 and 500 characters');
+                    }
+                    break;
+
+                case 'experience':
+                    if (value.trim() === '') {
+                        clearValidation(elementId);
+                    } else if (validateExperience(value)) {
+                        showSuccess(elementId);
+                    } else {
+                        showError(elementId, 'Experience must be between 0 and 50 years');
+                    }
+                    break;
+            }
+        }
+
+        // Form submission
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const errors = [];
+            
+            // Validate all JavaScript elements
+            jsValidatedElements.forEach(elementId => {
+                const element = document.getElementById(elementId);
+                const value = element.value.trim();
+                
+                if (value === '') {
+                    errors.push(`${getFieldLabel(elementId)} is required`);
+                    showError(elementId, `${getFieldLabel(elementId)} is required`);
+                } else {
+                    validateField(elementId);
+                    const group = document.getElementById(elementId + 'Group');
+                    if (group.classList.contains('error')) {
+                        const errorElement = document.getElementById(elementId + 'Error');
+                        errors.push(errorElement.textContent);
+                    }
+                }
+            });
+
+            // Show validation summary
+            if (errors.length > 0) {
+                errorList.innerHTML = '';
+                errors.forEach(error => {
+                    const li = document.createElement('li');
+                    li.textContent = error;
+                    errorList.appendChild(li);
+                });
+                validationSummary.style.display = 'block';
+                validationSummary.scrollIntoView({ behavior: 'smooth' });
+            } else {
+                validationSummary.style.display = 'none';
+                alert('🎉 Registration successful! Welcome to the Fantastic Four family! 🚀');
+                form.reset();
+                jsValidatedElements.forEach(elementId => clearValidation(elementId));
+            }
+        });
+
+        function getFieldLabel(elementId) {
+            const labels = {
+                heroName: 'Hero Name',
+                email: 'Email Address',
+                age: 'Age',
+                phone: 'Phone Number',
+                password: 'Password',
+                confirmPassword: 'Confirm Password',
+                superpower: 'Superpower Description',
+                experience: 'Years of Experience'
+            };
+            return labels[elementId] || elementId;
+        }
+
+        // Availability range slider
+        const availabilitySlider = document.getElementById('availability');
+        const availabilityValue = document.getElementById('availabilityValue');
+        
+        availabilitySlider.addEventListener('input', function() {
+            availabilityValue.textContent = this.value + '%';
+        });
+
+        // Character counter for mission preferences
+        const missionPreferences = document.getElementById('missionPreferences');
+        missionPreferences.addEventListener('input', function() {
+            const remaining = 200 - this.value.length;
+            if (remaining < 50) {
+                this.style.color = remaining < 0 ? '#e74c3c' : '#f39c12';
+            } else {
+                this.style.color = '#2c3e50';
+            }
+        });
+    </script>
+</body>
+</html>
