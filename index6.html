@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Death Predictor</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="left-side">
+            <img src="shovel.png" alt="Man with shovel" id="man-with-shovel">
+            <img src="deathpit.png" alt="Coffin" id="coffin">
+            <img src="human.png" alt="Human" id="human">
+        </div>
+        <div class="right-side">
+            <div class="input-box">
+                <h2>Death Predictor</h2>
+                <select id="gender">
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="other">Other</option>
+                </select>
+                <input type="text" id="age" placeholder="Enter your age">
+                <input type="text" id="food" placeholder="Favorite food">
+                <button id="predict-btn">Predict</button>
+                <p id="result"></p>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,173 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-image: url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1600&auto=format&fit=crop');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 20px;
+}
+
+.container {
+    display: flex;
+    width: 90%;
+    max-width: 1200px; 
+    height: 80%;
+    min-height: 600px;
+    border: 1px solid #ccc;
+    background-color: rgba(103, 102, 102, 0.85);
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    overflow: hidden;
+}
+
+.left-side {
+    width: 60%;
+    position: relative;
+    background-color: transparent;
+    padding: 20px;
+}
+
+#man-with-shovel {
+    position: absolute;
+    bottom: 110px;
+    left: 0%;
+    height: 320px;
+    width: auto;
+    transform-origin: center bottom; 
+    transition: left 2s ease-in-out, bottom 2s ease-in-out, transform 1.5s ease-in-out 2s;
+    z-index: 3;
+}
+
+/* Dig animation */
+@keyframes dig {
+    0% { transform: translateY(0) rotate(0); }
+    25% { transform: translateY(-10px) rotate(-5deg); }
+    50% { transform: translateY(0) rotate(0); }
+    75% { transform: translateY(-6px) rotate(3deg); }
+    100% { transform: translateY(0) rotate(0); }
+}
+
+#man-with-shovel.dig {
+    animation: dig 0.6s ease-in-out;
+}
+
+#coffin {
+    position: absolute;
+    bottom: 60px;
+    right: 6%;
+    width: 220px;
+    opacity: 0.95;
+    z-index: 5;
+    transition: left 0.8s ease-in-out, right 0.8s ease-in-out, transform 0.6s ease-in-out;
+}
+
+#human {
+    position: absolute;
+    bottom: 60px;
+    left: 6%;
+    height: 220px;
+    width: auto;
+    z-index: 2;
+    transition: left 1s ease-in-out, transform 0.6s ease-in-out, opacity 0.6s ease-in-out;
+}
+
+#human.inside {
+    opacity: 0.9;
+    transform: translate(-30px, 18px) scale(0.8);
+    z-index: 1;
+}
+
+#man-with-shovel.is-dead {
+    left: 65%;
+    bottom: 110px;
+    transform: rotate(50deg) scale(0.40); 
+}
+
+/* Dirt particle effects */
+.dirt {
+    position: absolute;
+    width: var(--size, 8px);
+    height: var(--size, 8px);
+    background: radial-gradient(circle at 30% 30%, #6b4e2e 0%, #5a4428 60%, #3f2f1e 100%);
+    border-radius: 50%;
+    pointer-events: none;
+    opacity: 0.95;
+    filter: blur(0.2px);
+    animation: dirtSplash var(--dur, 700ms) ease-out forwards;
+    z-index: 4;
+}
+
+@keyframes dirtSplash {
+    0%   { transform: translate(0, 0) scale(1); opacity: 1; }
+    90%  { opacity: 0.9; }
+    100% { transform: translate(var(--dx, 40px), var(--dy, -60px)) scale(0.8); opacity: 0; }
+}
+
+.right-side {
+    width: 40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    padding: 20px;
+    border-left: 1px solid #ddd;
+}
+
+.input-box {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.input-box h2 {
+    margin-bottom: 25px;
+    color: #333;
+}
+
+.input-box input, .input-box select, .input-box button {
+    display: block;
+    width: 90%;
+    max-width: 300px;
+    margin-bottom: 15px;
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.input-box > *:last-child {
+    margin-bottom: 0;
+}
+
+#predict-btn {
+    background-color: #d9534f;
+    color: white;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.3s ease;
+}
+
+#predict-btn:hover {
+    background-color: #c9302c;
+}
+
+#result {
+    margin-top: 20px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    min-height: 27px;
+}
